@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Vedanvi Healthcare</title>
+    <!-- Use Inter font for a clean, modern aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .cart-page { max-width: 1300px; margin: 40px auto; display: flex; gap: 40px; padding: 0 20px; font-family: 'Inter', sans-serif;}
+        .cart-left { flex: 2; }
+        .cart-right { flex: 1; max-width: 400px; }
+        
+        .cart-table-header { display: flex; justify-content: space-between; font-weight: 800; color: #0b5ed7; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;}
+        .cart-product-col { flex: 2; }
+        .cart-qty-col, .cart-price-col { flex: 1; text-align: center; }
+        
+        .cart-item { display: flex; align-items: center; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 4px; }
+        .cart-item-img { width: 100px; height: 100px; object-fit: contain; margin-right: 20px; background: #f8f9fa; padding: 10px; border-radius: 4px;}
+        .cart-item-info { flex: 2; }
+        .cart-item-title { font-weight: 700; color: #0b5ed7; margin-bottom: 15px; font-size: 16px;}
+        .cart-item-detail { font-size: 14px; color: #555; margin-bottom: 5px;}
+        .cart-qty-control { flex: 1; display: flex; justify-content: center; }
+        .qty-box { display: flex; align-items: center; border: 1px solid #ccc; border-radius: 4px; background: #f8f9fa;}
+        .qty-btn { background: none; border: none; padding: 8px 15px; cursor: pointer; font-size: 16px;}
+        .qty-input { width: 40px; text-align: center; border: none; background: transparent; font-weight: 600;}
+        .cart-item-price { flex: 1; text-align: center; font-weight: 800; color: #000;}
+        
+        .trash-btn { background: #1a9aa6; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;}
+        
+        .cart-summary { border: 1px solid #ddd; padding: 30px; padding-top: 20px; border-radius: 4px;}
+        .cart-summary-title { font-weight: 800; color: #0b5ed7; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 18px;}
+        .subtotal-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; color: #0b5ed7; margin: 30px 0;}
+        .checkout-btn { width: 100%; padding: 15px; background: #ffc107; color: #000; font-weight: 800; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: 0.2s;}
+        .checkout-btn:hover { background: #e0a800; }
+        
+        .continue-btn { text-align: center; display: block; margin-top: 20px; color: #0b5ed7; font-weight: 800; text-decoration: none;}
+        .tax-note { font-size: 13px; color: #666; text-align: center; margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <%- include('partials/flash') %>
+    <!-- Top Bar -->
+    <div class="top-bar" style="background-color: #e6f7ff; color: #0b5ed7; font-weight: 600; text-align: center; padding: 10px;">
+        Free Shipping On All Orders Above Rs. 1000 Within India 📦
+    </div>
+
+    <!-- Header Mimic -->
+    <header class="header" style="padding: 20px 40px; border-bottom: 1px solid #eee;">
+        <div class="header-container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto;">
+            <div class="logo-area" style="display: flex; gap: 40px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;" onclick="window.location.href='/'">
+                    <i class="fa-solid fa-leaf" style="font-size: 32px; color: #ff6a00;"></i>
+                    <div>
+                        <h1 style="color: #0b5ed7; font-size: 26px; font-weight: 800; letter-spacing: 0.5px; margin: 0;">Vedanvi</h1>
+                        <p style="color: #ff6a00; font-size: 11px; margin: 0; font-style: italic; letter-spacing: 0.2px;">GLOBAL HEALTHCARE</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-bar" style="flex: 1; max-width: 500px; display: flex; position: relative; margin: 0 40px;">
+                <input type="text" placeholder="Search for Products....." style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 40px; border: 1px solid #ddd; background: #f8f9fa;">
+                <button style="position: absolute; right: 5px; top: 5px; background: transparent; border: none; color: #0b5ed7; font-weight: 700; padding: 7px 15px; cursor: pointer;">Search</button>
+            </div>
+
+            <div class="header-icons" style="display: flex; gap: 20px;">
+                <% if (locals.user) { %>
+                    <a href="/profile" class="icon-link" style="background:#0d6efd;color:white;" title="My Profile"><i class="fa-solid fa-user"></i></a>
+                <% } else { %>
+                    <a href="/profile" class="icon-link" title="Login / Profile"><i class="fa-regular fa-user"></i></a>
+                <% } %>
+                <a href="/wishlist" class="icon-link" title="My Wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart" class="icon-link cart-icon" style="position: relative;"><i class="fa-solid fa-cart-shopping"></i>
+                    <span style="position: absolute; top: -5px; right: -5px; background: #f0ad4e; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px;">1</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div style="background: #f8f9fa; padding: 15px 50px; font-size: 14px; color: #555; border-top: 1px solid #eee;">
+        <a href="/" style="color: #0b5ed7; text-decoration: none;">Home</a> / <strong style="color: #0b5ed7;">Shopping Cart</strong>
+    </div>
+
+    <div class="cart-page">
+        <!-- Cart Left (Items) -->
+        <div class="cart-left">
+            <div class="cart-table-header">
+                <div class="cart-product-col" style="text-align: center;">Product</div>
+                <div class="cart-qty-col">Quantity</div>
+                <div class="cart-price-col">Price</div>
+            </div>
+
+            <div id="cart-items-container"></div>
+        </div>
+
+        <!-- Cart Right (Summary) -->
+        <div class="cart-right">
+            <div class="cart-summary-title">Cart Total</div>
+            <div class="cart-summary">
+                <div style="color: #0b5ed7; font-weight: 800; font-size: 18px; margin-bottom: 20px;">Add order note <i class="fa-regular fa-pen-to-square"></i></div>
+                
+                <div class="subtotal-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">₹0.00</span>
+                </div>
+
+                <button class="checkout-btn" onclick="window.location.href='/cart/checkout'">Proceed To Checkout</button>
+                <a href="/" class="continue-btn">Continue Shopping</a>
+                <p class="tax-note">Shipping, taxes, and discount codes calculated at checkout.</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if coming to cart directly, populate with a default if empty to show the initial state if needed
+    // But since it's dynamic, we just render what we have.
+    renderCart();
+});
+
+function renderCart() {
+    const container = document.getElementById('cart-items-container');
+    const subtotalEl = document.getElementById('cart-subtotal');
+    let cart = JSON.parse(localStorage.getItem('vedanvi_cart') || '[]');
+    let subtotal = 0;
+
+    container.innerHTML = '';
+    
+    if (cart.length === 0) {
+        container.innerHTML = '<div style="padding: 20px; text-align: center; font-size: 16px; color: #555;">Your cart is empty. <a href="/" style="color: #0b5ed7; text-decoration: underline;">Shop now</a></div>';
+    } else {
+        cart.forEach(item => {
+            subtotal += item.price * item.quantity;
+            let sizeHtml = item.size ? `
+                <div class="cart-item-detail"><strong>Size:</strong></div>
+                <div style="display: inline-block; border: 1px solid #0b5ed7; padding: 5px 15px; border-radius: 4px; font-size: 13px; font-weight: 600; color: #0b5ed7; margin-bottom: 10px;">${item.size}</div>
+            ` : '';
+            
+            let variantHtml = item.variant ? `
+                <div class="cart-item-detail"><strong>Variant:</strong></div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="border: 1px solid #0b5ed7; padding: 5px 15px; border-radius: 4px; font-size: 13px; font-weight: 600; color: #0b5ed7;">${item.variant}</div>
+                    <button class="trash-btn" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            ` : `
+                <div style="display: flex; align-items: center; gap: 15px; margin-top: 10px;">
+                    <button class="trash-btn" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `;
+            
+            container.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.img}" alt="${item.title}" class="cart-item-img">
+                <div class="cart-item-info">
+                    <div class="cart-item-title">${item.title}</div>
+                    ${sizeHtml}
+                    ${variantHtml}
+                </div>
+                <div class="cart-qty-control">
+                    <div class="qty-box">
+                        <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                        <input type="text" value="${item.quantity}" class="qty-input" readonly>
+                        <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                    </div>
+                </div>
+                <div class="cart-item-price">₹${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+            `;
+        });
+    }
+    
+    subtotalEl.innerText = `₹${subtotal.toFixed(2)}`;
+    
+    // Update badge in header if exists
+    const badge = document.querySelector('.icon-link.cart-icon span');
+    if (badge) {
+        const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
+        badge.innerText = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+}
+
+function updateQty(id, delta) {
+    let cart = JSON.parse(localStorage.getItem('vedanvi_cart') || '[]');
+    const item = cart.find(i => i.id === id);
+    if (item) {
+        item.quantity += delta;
+        if (item.quantity < 1) item.quantity = 1;
+        localStorage.setItem('vedanvi_cart', JSON.stringify(cart));
+        renderCart();
+    }
+}
+
+function deleteItem(id) {
+    let cart = JSON.parse(localStorage.getItem('vedanvi_cart') || '[]');
+    cart = cart.filter(i => i.id !== id);
+    localStorage.setItem('vedanvi_cart', JSON.stringify(cart));
+    renderCart();
+}
+</script>
+</html>

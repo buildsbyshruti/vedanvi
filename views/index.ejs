@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedanvi Global Healthcare | Anshveda | Mother & Baby Care</title>
+    <!-- Use Inter font for a clean, modern aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('partials/flash') %>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        Get Rs. 200 Off Your First Order when You Shop for Rs. 1250 & more. Use Code VED200 👋
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-area" style="display: flex; gap: 40px; align-items: center;">
+                <!-- Vedanvi Logo with Tagline -->
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <!-- Logo image in white background pill -->
+                    <div style="background: white; border-radius: 14px; padding: 6px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; overflow: hidden;">
+                        <img src="/images/vedanvi_logo.png" alt="Vedanvi Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div>
+                        <h1 style="color: #0b5ed7; font-size: 26px; font-weight: 800; font-family: 'Poppins', sans-serif; letter-spacing: 0.5px; margin: 0; line-height: 1.1;">Vedanvi</h1>
+                        <p style="color: #ff6a00; font-size: 10px; margin: 0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; line-height: 1.4;">GLOBAL HEALTHCARE</p>
+                        <p style="color: #555; font-size: 10px; margin: 0; font-style: italic; letter-spacing: 0.3px; line-height: 1.4;">The Touch of Healing &amp; Innovation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <div class="search-input-container">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Search for Products.....">
+                </div>
+                <button class="search-btn">Search</button>
+            </div>
+
+            <div class="header-icons">
+                <% if (locals.user) { %>
+                    <a href="/profile" class="icon-link" style="background:#0d6efd;color:white;" title="My Profile"><i class="fa-solid fa-user"></i></a>
+                <% } else { %>
+                    <a href="/profile" class="icon-link" title="Login / Profile"><i class="fa-regular fa-user"></i></a>
+                <% } %>
+                <a href="/wishlist" class="icon-link" title="My Wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart" class="icon-link cart-icon" style="position: relative;"><i class="fa-solid fa-cart-shopping"></i><span style="position: absolute; top: -5px; right: -5px; background: #f0ad4e; color: white; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 10px;">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#heroSlider">Home</a></li>
+            <li><a href="#products" class="active">Products <i class="fa-solid fa-chevron-down"></i></a></li>
+            <li><a href="#services">Services <i class="fa-solid fa-chevron-down"></i></a></li>
+            <li><a href="#anshveda-details">Anshveda Details</a></li>
+            <li><a href="#about-vedanvi">About Vedanvi</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Anshveda Hero Intro Section -->
+    <section id="heroSlider" class="anshveda-hero">
+
+        <!-- Slide 1: Cotton Wellness -->
+        <div class="av-slide active">
+            <div class="av-content">
+                <span class="av-tagline">BORN FROM NATURE, HEALING BY SCIENCE</span>
+                <h1 class="av-brand">Anshveda</h1>
+                <h2 class="av-headline">Pure <span>Cotton</span> Wellness</h2>
+                <p class="av-description">Meticulously crafted with nature's finest ingredients, Anshveda brings you hospital-grade absorbent cotton care — ultra-soft, skin-friendly, and trusted by healthcare professionals across India.</p>
+                <div class="av-actions">
+                    <button class="av-btn-primary" onclick="window.location.href='/cart'">SHOP NOW</button>
+                    <button class="av-btn-outline">Explore Range</button>
+                </div>
+            </div>
+            <div class="av-collage">
+                <div class="av-col-item av-col-rect" style="background: #dbeafe;">
+                    <img src="/images/cotton_roll.png" alt="Cotton Roll">
+                </div>
+                <div class="av-col-item av-col-arch" style="background: #0d9488;">
+                    <img src="/images/cotton_balls.png" alt="Cotton Balls">
+                </div>
+                <div class="av-col-item av-col-quarter" style="background: #f59e0b;">
+                    <img src="/images/transparent_cotton_roll.png" alt="New Cotton Roll">
+                </div>
+                <div class="av-col-item av-col-rect" style="background: #1e40af;">
+                    <img src="/images/cotton_roll.png" alt="Cotton Roll Pack">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Baby Care -->
+        <div class="av-slide">
+            <div class="av-content">
+                <span class="av-tagline">BORN FROM NATURE, HEALING BY SCIENCE</span>
+                <h1 class="av-brand">Anshveda</h1>
+                <h2 class="av-headline">Baby <span>Care</span> Essentials</h2>
+                <p class="av-description">Gentle, safe, and 100% pure. Our baby care range is crafted to protect your little one's delicate skin with hypoallergenic, dermatologically tested materials — because your baby deserves nothing but the best.</p>
+                <div class="av-actions">
+                    <button class="av-btn-primary" onclick="window.location.href='/cart'">SHOP NOW</button>
+                    <button class="av-btn-outline">Explore Range</button>
+                </div>
+            </div>
+            <div class="av-collage">
+                <div class="av-col-item av-col-arch" style="background: #ec4899;">
+                    <img src="/images/cotton_balls.png" alt="Cotton Balls">
+                </div>
+                <div class="av-col-item av-col-rect" style="background: #059669;">
+                    <img src="/images/cotton_roll.png" alt="Cotton Roll">
+                </div>
+                <div class="av-col-item av-col-rect" style="background: #7c3aed;">
+                    <img src="/images/cotton_balls_premium.png" alt="Premium Cotton Balls">
+                </div>
+                <div class="av-col-item av-col-quarter" style="background: #0ea5e9;">
+                    <img src="/images/cotton_balls.png" alt="Care">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Hygiene Protection -->
+        <div class="av-slide">
+            <div class="av-content">
+                <span class="av-tagline">BORN FROM NATURE, HEALING BY SCIENCE</span>
+                <h1 class="av-brand">Anshveda</h1>
+                <h2 class="av-headline">Hygiene <span>Protection</span> Range</h2>
+                <p class="av-description">From clinically-tested face masks to premium period care, our complete hygiene range keeps you protected every single day. Microbiologically tested, pH balanced, and eco-friendly — quality you can feel.</p>
+                <div class="av-actions">
+                    <button class="av-btn-primary" onclick="window.location.href='/cart'">SHOP NOW</button>
+                    <button class="av-btn-outline">Explore Range</button>
+                </div>
+            </div>
+            <div class="av-collage">
+                <div class="av-col-item av-col-rect" style="background: #d97706;">
+                    <img src="/images/cotton_roll.png" alt="Cotton Roll">
+                </div>
+                <div class="av-col-item av-col-quarter" style="background: #0284c7;">
+                    <img src="/images/cotton_balls_premium.png" alt="Premium Cotton Balls">
+                </div>
+                <div class="av-col-item av-col-arch" style="background: #16a34a;">
+                    <img src="/images/cotton_balls.png" alt="Cotton Balls">
+                </div>
+                <div class="av-col-item av-col-rect" style="background: #dc2626;">
+                    <img src="/images/cotton_roll.png" alt="Cotton Pack">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide indicator dots -->
+        <div class="av-dots">
+            <span class="av-dot active" onclick="goToAvSlide(0)"></span>
+            <span class="av-dot" onclick="goToAvSlide(1)"></span>
+            <span class="av-dot" onclick="goToAvSlide(2)"></span>
+        </div>
+
+        <!-- Prev / Next Arrow Buttons -->
+        <div class="av-arrows">
+            <button class="av-arrow" onclick="prevAvSlide()" aria-label="Previous slide">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <button class="av-arrow" onclick="nextAvSlideManual()" aria-label="Next slide">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <a href="#" class="whatsapp-float" aria-label="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </section>
+
+    <!-- =============================================
+         WHO WE ARE — VEDANVI SECTION
+    ============================================== -->
+    <section id="who-we-are" class="who-section">
+        <div class="who-container">
+
+            <!-- LEFT: Text Content -->
+            <div class="who-text">
+                <div class="who-label">
+                    <span style="color:#e53e3e; font-size:18px;">❤</span> Who We Are
+                </div>
+
+                <h2 class="who-title">We are <span>Vedanvi</span><br>Global Healthcare</h2>
+                <p class="who-subtitle">Your Trusted Medical &amp; Hygiene Products Manufacturer &amp; Supplier</p>
+
+                <!-- Three Pillars: TOUCH · HEALING · INNOVATION -->
+                <div class="who-pillars">
+                    <div class="who-pillar">
+                        <div class="pillar-icon-wrap"><i class="fa-solid fa-hands-holding-child"></i></div>
+                        <span class="pillar-text">TOUCH</span>
+                    </div>
+                    <div class="who-pillar">
+                        <div class="pillar-icon-wrap"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <span class="pillar-text">HEALING</span>
+                    </div>
+                    <div class="who-pillar">
+                        <div class="pillar-icon-wrap"><i class="fa-solid fa-lightbulb"></i></div>
+                        <span class="pillar-text">INNOVATION</span>
+                    </div>
+                </div>
+
+                <p class="who-desc">
+                    Vedanvi Global Healthcare Pvt. Ltd. is a premium manufacturer and supplier of medical, surgical, hygiene and baby care products under the trusted brand <strong>Anshveda</strong>. Based in Roorkee, Uttarakhand, we have spent over <strong>70 years</strong> delivering high-quality, GMP-certified, and microbiologically tested products to hospitals, healthcare professionals, and homes across India.
+                </p>
+                <p class="who-desc">
+                    Our product range covers <strong>cotton care, adult diapers, baby diapers, period wear, face masks</strong> and more — each crafted to the highest hygiene and quality standards.
+                </p>
+
+                <p class="who-tagline-italic">
+                    <em>"A touch of healing and innovation"</em>
+                </p>
+
+                <button class="who-btn" onclick="document.getElementById('about-vedanvi').scrollIntoView({behavior:'smooth'})">
+                    Know More &nbsp;<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- RIGHT: 2×2 Photo Collage -->
+            <div class="who-collage">
+                <div class="wc-item wc-tl">
+                    <img src="/images/vedanvi_facility.png" alt="Vedanvi Manufacturing Facility">
+                </div>
+                <div class="wc-item wc-tr">
+                    <img src="/images/vedanvi_team.png" alt="Vedanvi Team">
+                </div>
+                <div class="wc-item wc-bl">
+                    <img src="/images/cotton_roll.png" alt="Anshveda Cotton Roll">
+                </div>
+                <div class="wc-item wc-br">
+                    <img src="/images/transparent_cotton_roll.png" alt="Anshveda New Pack">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================
+         ANSHVEDA BRAND INTRO HEADER
+         (Mirrors JAJOO "Our Products" style)
+    ============================================= -->
+    <section class="anshveda-intro-header">
+        <div class="aih-inner">
+
+            <!-- Logo + Brand label -->
+            <div class="aih-brand-row">
+                <img src="/images/anshveda_logo.png" alt="Anshveda Logo" class="aih-logo">
+                <div class="aih-brand-text">
+                    <span class="aih-heart">❤</span>
+                    <span class="aih-brand-name">Anshveda</span>
+                    <span class="aih-tagline-inline">— Born from Nature, Healing by Science</span>
+                    <span class="aih-dash">—</span>
+                    <span class="aih-brand-sub">by Vedanvi Global Healthcare</span>
+                </div>
+            </div>
+
+            <!-- Section Title -->
+            <h2 class="aih-title">Our Products</h2>
+
+            <!-- Subtitle -->
+            <p class="aih-subtitle">
+                High-Quality Medical, Hygiene &amp; Baby Care Products — Born from Nature
+            </p>
+
+            <!-- Description -->
+            <p class="aih-desc">
+                Anshveda Zig-Zag Cotton is meticulously processed for <strong>Hospitals, Baby Care, Home Care, and Beauty Care</strong>. 
+                Our products are <strong>Microbiologically Tested, pH Tested, Contamination Free, and Hygienically Processed</strong> 
+                to ensure the highest safety standards. For best results, always <strong>sterilise before use</strong>, wash and dry hands properly, and 
+                <strong>do not reuse</strong> in emergency situations. Store in a <strong>dry, dust-free environment</strong> at room temperature, 
+                avoiding moisture. Do not use if the packaging is open, damaged, or tampered.
+            </p>
+
+            <!-- Decorative divider -->
+            <div class="aih-divider">
+                <span></span><i class="fa-solid fa-leaf"></i><span></span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Product Details Section -->
+    <section id="anshveda-details" class="product-details-section">
+        <div class="product-container">
+            <div class="product-images">
+                <div class="main-image-container">
+                    <img id="mainProductImg" src="/images/cotton_roll.png" alt="Anshveda Cotton Roll" class="main-product-img">
+                </div>
+                <div class="thumbnail-list">
+                    <img src="/images/cotton_roll.png" class="thumb-img active" alt="Thumb 1" onclick="changeProductImage(this, '/images/cotton_roll.png')">
+                    <img src="/images/cotton_balls.png" class="thumb-img" alt="Thumb 2" onclick="changeProductImage(this, '/images/cotton_balls.png')">
+                </div>
+            </div>
+            <div class="product-info" style="font-family: 'Poppins', sans-serif;">
+                <h2 style="font-family: 'Poppins', sans-serif;">Anshveda Absorbent Cotton Wool (I.P.)</h2>
+                <div class="product-badges">
+                    <span class="badge-pill">Microbiological Tested</span>
+                    <span class="badge-pill">pH Tested</span>
+                    <span class="badge-pill">Contamination Free</span>
+                    <span class="badge-pill">Hygienically Processed</span>
+                </div>
+
+                <div class="key-features-title">Key Features:</div>
+                <!-- Graphical Feature Icons Grid -->
+                <div class="graphical-features-grid">
+                    <div class="gf-item">
+                        <div class="gf-icon-wrap"><i class="fa-solid fa-cloud"></i></div>
+                        <p>ULTRA SOFT</p>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon-wrap"><i class="fa-solid fa-feather"></i></div>
+                        <p>FEATHER TOUCH</p>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon-wrap"><i class="fa-solid fa-droplet"></i></div>
+                        <p>SUPER ABSORBENCY</p>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon-wrap"><i class="fa-solid fa-leaf"></i></div>
+                        <p>NATURAL</p>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon-wrap"><i class="fa-solid fa-lightbulb"></i></div>
+                        <p>INNOVATIVE</p>
+                    </div>
+                    <div class="gf-item">
+                        <div class="gf-icon-wrap"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <p>SKIN FRIENDLY</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-block-styled">
+                        <h4>Do's & Don'ts:</h4>
+                        <ul class="list-small">
+                            <li><i class="fa-solid fa-check text-green"></i> Do sterilize before use.</li>
+                            <li><i class="fa-solid fa-xmark text-red"></i> Don't reuse cotton in emergency situation.</li>
+                            <li><i class="fa-solid fa-check text-green"></i> Do wash and dry your hands before use.</li>
+                            <li><i class="fa-solid fa-xmark text-red"></i> Don't apply directly to deep wounds.</li>
+                        </ul>
+                    </div>
+                    <div class="info-block-styled">
+                        <h4>Storage & Warnings:</h4>
+                        <p class="text-small"><strong>Storage Instructions:</strong> Store in a dry, dust-free environment at room temperature. Avoid exposure to moisture.</p>
+                        <p class="text-small"><strong>Warnings:</strong> Do not use if the packaging is open, damaged or tampered.</p>
+                        <p class="text-small text-italic text-blue mt-2"><strong>TO BE STERILISED BEFORE USE</strong></p>
+                    </div>
+                </div>
+
+                <div class="product-action-bar">
+                    <div class="price-wrap">
+                        <span class="price-large">₹199.00</span>
+                        <span class="mrp-small">(MRP: ₹235.00)</span>
+                    </div>
+                    <button class="add-to-cart-hero" onclick="addToCartAndRedirect({ id: 'cotton-wool-ip', title: 'Anshveda Absorbent Cotton Wool (I.P.)', price: 199.00, img: document.getElementById('mainProductImg').src, size: 'Medium', variant: 'Pack Of 1' })">
+                        <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function changeProductImage(thumb, src) {
+            document.getElementById('mainProductImg').src = src;
+            // Remove active class from all
+            const thumbs = document.querySelectorAll('.thumb-img');
+            thumbs.forEach(t => t.classList.remove('active'));
+            // Add to clicked
+            thumb.classList.add('active');
+        }
+
+        function addToCartAndRedirect(product) {
+            let cart = JSON.parse(localStorage.getItem('vedanvi_cart') || '[]');
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                product.quantity = 1;
+                cart.push(product);
+            }
+            localStorage.setItem('vedanvi_cart', JSON.stringify(cart));
+            window.location.href = '/cart';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('vedanvi_cart') || '[]');
+            const badge = document.querySelector('.icon-link.cart-icon span');
+            if (badge) {
+                const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
+                badge.innerText = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        });
+    </script>
+
+
+    <!-- Features Bar -->
+    <section id="services" class="features-bar">
+        <h2>Vedanvi is a one-stop destination for all your essential medical needs, we guarantee you must-haves you need to stock at home for general well-being and a healthy living.</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fa-solid fa-truck-fast"></i>
+                <p>Pan India Shipping</p>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-certificate"></i>
+                <p>100% Authentic</p>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-tags"></i>
+                <p>Direct From The Brand</p>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-business-time"></i>
+                <p>70 Years In Business</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestsellers -->
+    <section id="products" class="bestsellers-section">
+        <h2 class="section-title">Bestsellers</h2>
+        <div class="bestsellers-grid">
+
+            <!-- Item 5 -->
+            <div class="product-card">
+                <div class="discount-badge">-15%</div>
+                <img src="/images/cotton_roll.png" alt="Cotton Roll 400g">
+                <div class="card-content">
+                    <p class="pack-info">400g ROLL</p>
+                    <h4>Anshveda Premium Cotton Roll (Net. 400g)</h4>
+                    <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                    <p class="price-row">MRP: <del>₹210.00</del> <strong>₹178</strong></p>
+                </div>
+            </div>
+            <!-- Item 6 -->
+            <div class="product-card">
+                <div class="discount-badge">-20%</div>
+                <img src="/images/cotton_balls.png" alt="Cotton Balls Bag">
+                <div class="card-content">
+                    <p class="pack-info">100 BALLS PACK</p>
+                    <h4>Anshveda Pure Soft Cotton Balls</h4>
+                    <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="price-row">MRP: <del>₹120.00</del> <strong>₹96</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Anshveda Section -->
+    <section id="why-anshveda" class="why-anshveda-new">
+        <div class="wan-container">
+            <h2 class="wan-title">Why Anshveda?</h2>
+            <p class="wan-desc">
+                With a steadfast commitment to purity and excellence, Anshveda is a name that Healthcare professionals trust. With a wide variety of product range to offer, we guarantee you must-haves you need to stock at home for general well-being and a healthy living.
+            </p>
+            
+            <button id="wanReadMore" class="wan-read-more" onclick="expandWanContent()">Read More >></button>
+            
+            <div class="wan-hidden-content" id="wanHiddenContent">
+                <div class="wan-overlay" id="wanOverlay"></div>
+                <div class="wan-features">
+                    <!-- Feature 1 -->
+                    <div class="wan-feature">
+                        <h4>Best Quality Products</h4>
+                        <p>High quality standards are followed in our state-of-the-art manufacturing facilities to provide nothing but the best to you.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="wan-feature">
+                        <h4>Best Health Care</h4>
+                        <p>The company provides top quality products with greatest precision in the field of hygiene care at uncompromising quality standards.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="wan-feature">
+                        <h4>Trusted Excellence</h4>
+                        <p>Since its inception, Anshveda has gained the trust of the medical fraternity as well as the general population.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function expandWanContent() {
+            const content = document.getElementById('wanHiddenContent');
+            const btn = document.getElementById('wanReadMore');
+            if (!content.classList.contains('expanded')) {
+                content.classList.add('expanded');
+                btn.style.display = 'none';
+            }
+        }
+    </script>
+    <script>
+        // Anshveda Hero Slider
+        let avCurrentSlide = 0;
+        const avSlides = document.querySelectorAll('.av-slide');
+        const avDots = document.querySelectorAll('.av-dot');
+        let avSlideTimer;
+
+        function showAvSlide(index) {
+            avSlides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) slide.classList.add('active');
+            });
+            avDots.forEach((dot, i) => {
+                dot.classList.remove('active');
+                if (i === index) dot.classList.add('active');
+            });
+        }
+
+        function goToAvSlide(index) {
+            avCurrentSlide = index;
+            showAvSlide(avCurrentSlide);
+            resetAvTimer();
+        }
+
+        function nextAvSlide() {
+            avCurrentSlide = (avCurrentSlide + 1) % avSlides.length;
+            showAvSlide(avCurrentSlide);
+        }
+
+        function nextAvSlideManual() {
+            avCurrentSlide = (avCurrentSlide + 1) % avSlides.length;
+            showAvSlide(avCurrentSlide);
+            resetAvTimer();
+        }
+
+        function prevAvSlide() {
+            avCurrentSlide = (avCurrentSlide - 1 + avSlides.length) % avSlides.length;
+            showAvSlide(avCurrentSlide);
+            resetAvTimer();
+        }
+
+        function resetAvTimer() {
+            clearInterval(avSlideTimer);
+            avSlideTimer = setInterval(nextAvSlide, 2000);
+        }
+
+        // Start auto-rotating
+        resetAvTimer();
+    </script>
+    <!-- Footer Section -->
+    <footer id="contact" style="background-color: #f8fdfb; border-top: 1px solid #e0e0e0; padding: 60px 20px; color: #0b5ed7; margin-top: 50px; font-family: 'Inter', sans-serif;">
+        <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;">
+            <!-- Left Column -->
+            <div style="flex: 2; min-width: 300px;">
+                <p style="font-size: 14px; font-weight: 700; margin-bottom: 30px; color: #333;">All transactions are 100% secure and private</p>
+                
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 20px; color: #0b5ed7;">Get Social</h3>
+                <div style="display: flex; gap: 30px; margin-bottom: 40px; font-size: 14px;">
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <a href="#" style="color: #333; text-decoration: none; font-weight: 600;"><i class="fa-brands fa-instagram" style="color: #E1306C; margin-right: 8px;"></i> Instagram</a>
+                        <a href="#" style="color: #333; text-decoration: none; font-weight: 600;"><i class="fa-brands fa-twitter" style="color: #1DA1F2; margin-right: 8px;"></i> Twitter</a>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <a href="#" style="color: #333; text-decoration: none; font-weight: 600;"><i class="fa-brands fa-facebook" style="color: #4267B2; margin-right: 8px;"></i> Facebook</a>
+                        <a href="#" style="color: #333; text-decoration: none; font-weight: 600;"><i class="fa-brands fa-linkedin" style="color: #0077B5; margin-right: 8px;"></i> LinkedIn</a>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 15px; color: #0b5ed7;">Contact Us</h3>
+                <div style="font-size: 14px; line-height: 1.8; color: #333;">
+                    <p style="margin-bottom: 15px;"><strong>Vedanvi Global Healthcare Pvt. Ltd.,</strong><br>
+                    Corporate Head office<br>
+                    Near Ganesh Chowk, Ganeshpur,<br>
+                    Roorkee, Haridwar, Uttarakhand<br>
+                    PIN Code: 247667</p>
+
+                    <p style="margin-bottom: 15px; font-weight: 600;">
+                        MANJU GOYAL<br>
+                        <span style="font-weight: 400;">MANAGING DIRECTOR</span>
+                    </p>
+
+                    <p style="margin-top: 15px;">
+                        <i class="fa-solid fa-phone" style="color: #ff6a00; margin-right: 8px;"></i> 80068 48348<br>
+                        <i class="fa-solid fa-envelope" style="color: #ff6a00; margin-right: 8px;"></i> vedanviglobalhealthcare@rediffmail.com
+                    </p>
+                </div>
+            </div>
+
+            <!-- Links Columns -->
+            <div style="flex: 1; min-width: 150px;">
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 25px; color: #0b5ed7;">Top Categories</h3>
+                <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 2.5; font-weight: 600;">
+                    <li><a href="#" style="color: #555; text-decoration: none;">Cotton Rolls</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Cotton Balls</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Adult Diapers</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Period Panty</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Baby Care</a></li>
+                </ul>
+            </div>
+            
+            <div style="flex: 1; min-width: 150px;">
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 25px; color: #0b5ed7;">Quick Links</h3>
+                <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 2.5; font-weight: 600;">
+                    <li><a href="#" style="color: #555; text-decoration: none;">About Anshveda</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Delivery & Returns</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">FAQs</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Blog</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div style="flex: 1; min-width: 150px;">
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 25px; color: #0b5ed7;">Legal</h3>
+                <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 2.5; font-weight: 600;">
+                    <li><a href="#" style="color: #555; text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Shipping Policy</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Terms of Service</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">Refund Policy</a></li>
+                    <li><a href="#" style="color: #555; text-decoration: none;">My account</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

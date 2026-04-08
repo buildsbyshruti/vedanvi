@@ -1,0 +1,101 @@
+<!-- Flash Messages Toast -->
+<% if ((locals.flashSuccess && flashSuccess.length) || (locals.flashError && flashError.length) || (locals.flashInfo && flashInfo.length)) { %>
+<div id="flash-container" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 420px;
+    font-family: 'Inter', sans-serif;
+">
+    <% if (locals.flashSuccess) { flashSuccess.forEach(function(msg) { %>
+        <div class="flash-toast flash-success" style="
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 5px solid #28a745;
+            color: #155724;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(40,167,69,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: flashSlideIn 0.4s ease-out;
+            font-weight: 600;
+            font-size: 14px;
+        ">
+            <i class="fa-solid fa-circle-check" style="font-size: 20px;"></i>
+            <span style="flex:1;"><%= msg %></span>
+            <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#155724;font-size:18px;cursor:pointer;padding:0;opacity:0.7;">&times;</button>
+        </div>
+    <% }); } %>
+
+    <% if (locals.flashError) { flashError.forEach(function(msg) { %>
+        <div class="flash-toast flash-error" style="
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 5px solid #dc3545;
+            color: #721c24;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(220,53,69,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: flashSlideIn 0.4s ease-out;
+            font-weight: 600;
+            font-size: 14px;
+        ">
+            <i class="fa-solid fa-circle-exclamation" style="font-size: 20px;"></i>
+            <span style="flex:1;"><%= msg %></span>
+            <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#721c24;font-size:18px;cursor:pointer;padding:0;opacity:0.7;">&times;</button>
+        </div>
+    <% }); } %>
+
+    <% if (locals.flashInfo) { flashInfo.forEach(function(msg) { %>
+        <div class="flash-toast flash-info" style="
+            background: linear-gradient(135deg, #cce5ff 0%, #b8daff 100%);
+            border-left: 5px solid #0d6efd;
+            color: #004085;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(13,110,253,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: flashSlideIn 0.4s ease-out;
+            font-weight: 600;
+            font-size: 14px;
+        ">
+            <i class="fa-solid fa-circle-info" style="font-size: 20px;"></i>
+            <span style="flex:1;"><%= msg %></span>
+            <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#004085;font-size:18px;cursor:pointer;padding:0;opacity:0.7;">&times;</button>
+        </div>
+    <% }); } %>
+</div>
+
+<style>
+    @keyframes flashSlideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to   { transform: translateX(0);    opacity: 1; }
+    }
+    @keyframes flashSlideOut {
+        from { transform: translateX(0);    opacity: 1; }
+        to   { transform: translateX(100%); opacity: 0; }
+    }
+</style>
+
+<script>
+    // Auto-dismiss flash toasts after 4 seconds
+    setTimeout(function() {
+        var toasts = document.querySelectorAll('.flash-toast');
+        toasts.forEach(function(toast, i) {
+            setTimeout(function() {
+                toast.style.animation = 'flashSlideOut 0.4s ease-in forwards';
+                setTimeout(function() { toast.remove(); }, 400);
+            }, i * 200);
+        });
+    }, 4000);
+</script>
+<% } %>

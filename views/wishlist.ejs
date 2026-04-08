@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .wishlist-page {
+            max-width: 1300px;
+            margin: 60px auto;
+            padding: 0 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .wishlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e6f7ff;
+            padding-bottom: 20px;
+        }
+
+        .wishlist-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0b5ed7;
+        }
+
+        .wishlist-count {
+            background: #e6f7ff;
+            color: #0b5ed7;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .wishlist-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 25px;
+            border: 1px solid #eee;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .remove-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f8d7da;
+            color: #dc3545;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .remove-wishlist:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .wishlist-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            background: #f8fafb;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .wishlist-info h4 {
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .wishlist-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0b5ed7;
+            margin-bottom: 25px;
+        }
+
+        .wishlist-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-move-to-cart {
+            flex: 1;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-move-to-cart:hover {
+            background: #0b5ed7;
+            box-shadow: 0 4px 12px rgba(13,110,253,0.3);
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 100px 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .empty-wishlist i {
+            font-size: 80px;
+            color: #e6f7ff;
+            margin-bottom: 30px;
+        }
+
+        .empty-wishlist h2 {
+            color: #0b5ed7;
+            margin-bottom: 15px;
+        }
+
+        .empty-wishlist p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .btn-shop {
+            display: inline-block;
+            background: #0d6efd;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-shop:hover {
+            background: #0b5ed7;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/flash') %>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-area" style="display: flex; gap: 40px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 14px; cursor: pointer;" onclick="window.location.href='/'">
+                    <div style="background: white; border-radius: 14px; padding: 6px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; overflow: hidden;">
+                        <img src="/images/vedanvi_logo.png" alt="Vedanvi Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div>
+                        <h1 style="color: #0b5ed7; font-size: 26px; font-weight: 800; font-family: 'Poppins', sans-serif; letter-spacing: 0.5px; margin: 0; line-height: 1.1;">Vedanvi</h1>
+                        <p style="color: #ff6a00; font-size: 10px; margin: 0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; line-height: 1.4;">GLOBAL HEALTHCARE</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-icons">
+                <% if (locals.user) { %>
+                    <a href="/profile" class="icon-link"><i class="fa-solid fa-user"></i></a>
+                <% } else { %>
+                    <a href="/login" class="icon-link"><i class="fa-regular fa-user"></i></a>
+                <% } %>
+                <a href="/wishlist" class="icon-link" style="background: #dc3545; color: white;"><i class="fa-solid fa-heart"></i></a>
+                <a href="/cart" class="icon-link cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="wishlist-page">
+        <div class="wishlist-header">
+            <h1 class="wishlist-title">My Wishlist</h1>
+            <span class="wishlist-count"><%= wishlist.length %> Items</span>
+        </div>
+
+        <div class="wishlist-grid">
+            <% if (wishlist.length === 0) { %>
+                <div class="empty-wishlist" style="grid-column: 1 / -1;">
+                    <i class="fa-regular fa-heart"></i>
+                    <h2>Your wishlist is empty</h2>
+                    <p>Save items you love and buy them later.</p>
+                    <a href="/" class="btn-shop">Shop Now</a>
+                </div>
+            <% } else { %>
+                <% wishlist.forEach(item => { %>
+                    <div class="wishlist-item">
+                        <form action="/wishlist/remove" method="POST" style="position: absolute; top: 15px; right: 15px; z-index: 10;">
+                            <input type="hidden" name="productId" value="<%= item.id %>">
+                            <button type="submit" class="remove-wishlist" title="Remove"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                        <img src="<%= item.img %>" alt="<%= item.title %>" class="wishlist-img">
+                        <div class="wishlist-info">
+                            <h4><%= item.title %></h4>
+                            <div class="wishlist-price">₹<%= item.price.toFixed(2) %></div>
+                            <div class="wishlist-actions">
+                                <form action="/wishlist/move-to-cart" method="POST" style="flex:1;" onsubmit="addToLocalCart('<%= item.id %>', '<%= item.title %>', <%= item.price %>, '<%= item.img %>')">
+                                    <input type="hidden" name="productId" value="<%= item.id %>">
+                                    <button type="submit" class="btn-move-to-cart">
+                                        <i class="fa-solid fa-cart-arrow-down"></i> Add to Cart
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</body>
+<script>
+function addToLocalCart(id, title, price, img) {
+    let cart = JSON.parse(localStorage.getItem('vedanvi_cart') || '[]');
+    let item = cart.find(i => i.id === id);
+    if (item) {
+        item.quantity += 1;
+    } else {
+        cart.push({ id, title, price, img, quantity: 1 });
+    }
+    localStorage.setItem('vedanvi_cart', JSON.stringify(cart));
+}
+</script>
+</html>
