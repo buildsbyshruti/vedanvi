@@ -1819,10 +1819,13 @@ body {
    RESPONSIVE — MOBILE (≤ 768px)
    ================================================ */
 @media (max-width: 768px) {
+    /* Prevent any overflow */
+    body, html { overflow-x: hidden; width: 100%; }
+    
     /* Top bar */
     .top-bar { font-size: 12px; padding: 8px 10px; }
 
-    /* Header — stack vertically */
+    /* Header — stack vertically and override inline styles */
     .header { padding: 12px 0; }
     .header-container {
         flex-wrap: wrap;
@@ -1830,6 +1833,11 @@ body {
         padding: 0 12px;
         justify-content: space-between;
     }
+    .logo-area { gap: 10px !important; }
+    .logo-area div { gap: 8px !important; }
+    .logo-area h1 { font-size: 20px !important; }
+    .logo-area img { max-width: 45px; }
+
     .search-bar {
         order: 3;
         width: 100%;
@@ -1859,35 +1867,57 @@ body {
         min-height: auto;
         gap: 30px;
         text-align: center;
+        overflow: hidden;
     }
-    .av-content { max-width: 100%; }
-    .av-brand { font-size: 48px; }
+    .av-content { max-width: 100%; min-width: unset; }
+    .av-brand { font-size: 40px; }
     .av-headline { font-size: 22px; }
     .av-description { font-size: 14px; margin-bottom: 24px; }
     .av-actions { justify-content: center; }
     .av-btn-primary,
     .av-btn-outline { padding: 12px 24px; font-size: 14px; }
+    
+    .av-products {
+        min-width: unset;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        height: 280px;
+    }
+    .av-circle.large {
+        width: 180px; height: 180px; left: 0; top: 0;
+    }
+    .av-circle.medium {
+        width: 130px; height: 130px; right: 0; top: 10px;
+    }
+    .av-circle.small {
+        width: 110px; height: 110px; bottom: 20px;
+    }
+
     .av-collage {
         width: 100%;
-        max-width: 340px;
+        max-width: 300px;
         height: 300px;
         margin: 0 auto;
+        min-width: unset;
     }
     .av-dots { left: 50%; transform: translateX(-50%); bottom: 16px; }
     .av-arrows { right: 50%; transform: translateX(50%); bottom: 70px; }
 
     /* Who We Are */
-    .who-section { padding: 50px 20px; }
+    .who-section { padding: 50px 15px; }
     .who-container { flex-direction: column; gap: 30px; }
     .who-text { max-width: 100%; min-width: unset; }
-    .who-title { font-size: 30px; }
-    .who-subtitle { font-size: 15px; }
-    .who-pillars { gap: 10px; justify-content: center; }
+    .who-title { font-size: 26px; }
+    .who-subtitle { font-size: 14px; }
+    .who-pillars { gap: 10px; justify-content: center; flex-wrap: wrap; }
     .who-pillar { width: 90px; height: 140px; }
     .who-collage {
         min-width: unset;
         width: 100%;
-        grid-template-rows: 180px 150px;
+        max-width: 320px;
+        margin: 0 auto;
+        grid-template-rows: 160px 140px;
     }
 
     /* Anshveda Intro Header */
@@ -1925,13 +1955,17 @@ body {
     .card-content h4 { font-size: 13px; height: auto; }
 
     /* Features Bar */
-    .features-bar h2 { font-size: 16px; margin-bottom: 30px; }
-    .features-grid { gap: 20px; }
-    .feature-item i { font-size: 28px; }
+    .features-bar { margin: 40px auto; padding: 0 15px; }
+    .features-bar h2 { font-size: 16px; margin-bottom: 25px; }
+    .features-grid { gap: 20px; flex-direction: column; align-items: flex-start; }
+    .feature-item { flex-direction: row; text-align: left; }
+    .feature-item i { font-size: 28px; width: 40px; text-align: center; }
 
     /* Why Anshveda */
-    .wan-title { font-size: 26px; }
+    .wan-title { font-size: 22px; }
+    .wan-desc { font-size: 14px; }
     .wan-features { flex-direction: column; gap: 20px; }
+    .wan-feature h4 { font-size: 18px; }
 
     /* Cart page */
     .cart-page {
@@ -1956,12 +1990,13 @@ body {
     .wishlist-price { font-size: 18px; }
 
     /* Profile */
-    .profile-page { margin: 20px auto; }
+    .profile-page { margin: 20px auto; width: 100%; padding: 0 15px; }
     .profile-info-grid { grid-template-columns: 1fr; }
-    .profile-header { padding: 30px 20px; }
+    .profile-header { padding: 25px 15px; }
     .profile-name { font-size: 20px; }
-    .profile-body { padding: 20px; }
-    .profile-actions { flex-direction: column; }
+    .profile-body { padding: 20px 15px; }
+    .profile-info-item { padding: 12px; }
+    .profile-actions { flex-direction: column; gap: 10px; }
     .profile-btn { width: 100%; justify-content: center; }
 
     /* Footer */
@@ -1973,12 +2008,14 @@ body {
    ================================================ */
 @media (max-width: 480px) {
     /* Header logo text */
-    h1[style*="26px"] { font-size: 20px !important; }
+    h1[style*="26px"] { font-size: 18px !important; }
+    .logo-area div[style*="width: 60px"] { width: 45px !important; height: 45px !important; padding: 4px !important; }
 
     /* Slider */
-    .av-brand { font-size: 38px; }
+    .av-brand { font-size: 32px; }
     .av-headline { font-size: 18px; }
-    .av-collage { height: 240px; max-width: 280px; }
+    .av-collage { height: 260px; max-width: 260px; gap: 8px; }
+    .av-products { height: 260px; max-width: 260px; }
     .av-btn-primary,
     .av-btn-outline { padding: 10px 18px; font-size: 13px; width: 100%; justify-content: center; }
     .av-actions { flex-direction: column; }
